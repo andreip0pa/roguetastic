@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "neikeq.godot-csharp-vscode",
+        "google.geminicodeassist",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "esbenp.prettier-vscode"
+    ]
+}
