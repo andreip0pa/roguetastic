@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwfogqx7qwmyn"]
+[gd_scene load_steps=9 format=3 uid="uid://dwfogqx7qwmyn"]
 
 [ext_resource type="Texture2D" uid="uid://c200ow55qsuqo" path="res://Resources/Assets/donut.png" id="1_r150o"]
+[ext_resource type="Texture2D" uid="uid://bh2kvfekeonn3" path="res://Resources/Skybox/sky_41_2k.png" id="2_idj7w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1w88"]
 albedo_texture = ExtResource("1_r150o")
@@ -17,6 +18,18 @@ material = SubResource("StandardMaterial3D_c1w88")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kln2b"]
+panorama = ExtResource("2_idj7w")
+energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_rgh2o"]
+sky_material = SubResource("PanoramaSkyMaterial_kln2b")
+
+[sub_resource type="Environment" id="Environment_pbw6q"]
+background_mode = 2
+background_color = Color(0, 0.48235294, 0, 1)
+sky = SubResource("Sky_rgh2o")
+
 [node name="Main" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -26,3 +39,6 @@ mesh = SubResource("TorusMesh_c1w88")
 transform = Transform3D(1, 0, 0, 0, 0.84115225, 0.54079837, 0, -0.54079837, 0.84115225, 0.0138475895, 1.0044974, 1.5418075)
 environment = SubResource("Environment_c1w88")
 current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pbw6q")
