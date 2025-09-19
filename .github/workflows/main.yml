@@ -1,0 +1,45 @@
+on:
+  push:
+    branches:
+    - Content/Environment
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for existing PR
+        id: check-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: context.ref,
+              base: 'main', // Target branch
+              state: 'open'
+            });
+            if (pullRequests.length > 0) {
+              console.log('An open pull request already exists. Skipping creation.');
+              core.setOutput('pr_exists', 'true');
+            } else {
+              console.log('No open pull request found. Proceeding with creation.');
+              core.setOutput('pr_exists', 'false');
+            }
+          result-encoding: string
+
+      - name: Create Pull Request
+        if: steps.check-pr.outputs.pr_exists == 'false'
+        id: create-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const branchName = context.ref.split('/').pop();
+            const { data: pullRequest } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Auto-PR for ' + branchName,
+              head: branchName,
+              base: 'main',
+              body: 'This pull request was automatically created by GitHub Actions on push to ' + branchName + '.'
+            });
+            console.log('Pull request created: ' + pullRequest.html_url);
