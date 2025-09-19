@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - Content/Environment
+    - Content/**
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
