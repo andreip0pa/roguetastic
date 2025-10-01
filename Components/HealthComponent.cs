@@ -13,7 +13,6 @@ public partial class HealthComponent: Node
 	#region Signals
 	[Signal]
 	public delegate void HealthChangedEventHandler(int newHealth);
-
 	[Signal]
 	public delegate void TookDamageEventHandler(int damage);
 	[Signal]

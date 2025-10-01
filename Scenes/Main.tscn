@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwfogqx7qwmyn"]
+[gd_scene load_steps=7 format=3 uid="uid://dwfogqx7qwmyn"]
 
+[ext_resource type="PackedScene" uid="uid://16kuk668fuc" path="res://Scenes/Characters/Player/PlayerCharacter.tscn" id="1_kln2b"]
 [ext_resource type="Texture2D" uid="uid://bh2kvfekeonn3" path="res://Resources/Skybox/sky_41_2k.png" id="2_idj7w"]
-
-[sub_resource type="Environment" id="Environment_c1w88"]
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+[ext_resource type="PackedScene" uid="uid://he6mvir8llmn" path="res://Scenes/Characters/Enemies/BasicEnemy/BasicEnemy.tscn" id="2_rgh2o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kln2b"]
 panorama = ExtResource("2_idj7w")
@@ -20,9 +18,13 @@ sky = SubResource("Sky_rgh2o")
 
 [node name="Main" type="Node3D"]
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_kln2b")]
+
+[node name="BasicEnemy" parent="." instance=ExtResource("2_rgh2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2754087, 0, 0)
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.84115225, 0.54079837, 0, -0.54079837, 0.84115225, 0.0138475895, 1.0044974, 1.5418075)
-environment = SubResource("Environment_c1w88")
+transform = Transform3D(0.5045276, 0, -0.8633956, 0, 1, 0, 0.8633956, 0, 0.5045276, -1.2550038, 0.7525041, 1.711262)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

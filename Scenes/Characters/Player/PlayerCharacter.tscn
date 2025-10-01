@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://16kuk668fuc"]
+
+[ext_resource type="Script" uid="uid://21mrcd0ysut1" path="res://Scenes/Characters/Player/PlayerCharacter.cs" id="1_qfp5o"]
+[ext_resource type="Script" uid="uid://pgn0joxfb1v4" path="res://Components/HealthComponent.cs" id="2_yjpyd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qfp5o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjpyd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l6mb"]
+next_pass = SubResource("ShaderMaterial_yjpyd")
+albedo_color = Color(0.19786823, 0.625217, 0.9858896, 1)
+
+[node name="PlayerCharacter" type="Node3D"]
+script = ExtResource("1_qfp5o")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_yjpyd")
+metadata/_custom_type_script = "uid://pgn0joxfb1v4"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_qfp5o")
+surface_material_override/0 = SubResource("StandardMaterial3D_0l6mb")

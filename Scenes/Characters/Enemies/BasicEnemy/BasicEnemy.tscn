@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://he6mvir8llmn"]
+
+[ext_resource type="Script" uid="uid://pgn0joxfb1v4" path="res://Components/HealthComponent.cs" id="1_bs2go"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bs2go"]
+albedo_color = Color(0.8994983, 0.08251367, 0.1154611, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ypmn6"]
+material = SubResource("StandardMaterial3D_bs2go")
+
+[node name="BasicEnemy" type="Node3D"]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_bs2go")
+metadata/_custom_type_script = "uid://pgn0joxfb1v4"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ypmn6")
