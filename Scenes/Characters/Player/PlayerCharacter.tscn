@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://16kuk668fuc"]
+
+[ext_resource type="Script" uid="uid://21mrcd0ysut1" path="res://Scenes/Characters/Player/PlayerCharacter.cs" id="1_qfp5o"]
+[ext_resource type="Script" uid="uid://pgn0joxfb1v4" path="res://Components/HealthComponent.cs" id="2_yjpyd"]
+[ext_resource type="PackedScene" uid="uid://b6xe1d2cgxvoj" path="res://Scenes/UI/HealthBar/HealthBar.tscn" id="3_yjpyd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qfp5o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjpyd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l6mb"]
+next_pass = SubResource("ShaderMaterial_yjpyd")
+albedo_color = Color(0.19786823, 0.625217, 0.9858896, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0l6mb"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_co5e2"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_texture = SubResource("ViewportTexture_0l6mb")
+stencil_flags = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dtk52"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_co5e2")
+size = Vector2(2, 0.1)
+
+[node name="PlayerCharacter" type="Node3D" node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("1_qfp5o")
+healthComponent = NodePath("HealthComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_yjpyd")
+metadata/_custom_type_script = "uid://pgn0joxfb1v4"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_qfp5o")
+surface_material_override/0 = SubResource("StandardMaterial3D_0l6mb")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_yjpyd")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
+mesh = SubResource("PlaneMesh_dtk52")
+healthComponent = NodePath("../HealthComponent")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://he6mvir8llmn"]
+
+[ext_resource type="Script" uid="uid://pgn0joxfb1v4" path="res://Components/HealthComponent.cs" id="1_bs2go"]
+[ext_resource type="PackedScene" uid="uid://b6xe1d2cgxvoj" path="res://Scenes/UI/HealthBar/HealthBar.tscn" id="2_ypmn6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bs2go"]
+albedo_color = Color(0.8994983, 0.08251367, 0.1154611, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ypmn6"]
+material = SubResource("StandardMaterial3D_bs2go")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ypmn6"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf7vq"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_texture = SubResource("ViewportTexture_ypmn6")
+stencil_flags = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hs6y8"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_sf7vq")
+size = Vector2(2, 0.1)
+
+[node name="BasicEnemy" type="Node3D"]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_bs2go")
+metadata/_custom_type_script = "uid://pgn0joxfb1v4"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ypmn6")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("2_ypmn6")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
+mesh = SubResource("PlaneMesh_hs6y8")
+healthComponent = NodePath("../HealthComponent")
