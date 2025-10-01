@@ -1,18 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwfogqx7qwmyn"]
+[gd_scene load_steps=6 format=3 uid="uid://dwfogqx7qwmyn"]
 
-[ext_resource type="Texture2D" uid="uid://c200ow55qsuqo" path="res://Resources/Assets/donut.png" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://bh2kvfekeonn3" path="res://Resources/Skybox/sky_41_2k.png" id="2_idj7w"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1w88"]
-albedo_texture = ExtResource("1_r150o")
-roughness = 0.3
-uv1_scale = Vector3(0.45, 0.45, 0.45)
-uv1_offset = Vector3(0.225, 0.58, 0)
-stencil_flags = 2
-stencil_color = Color(0.34494594, 0.71480924, 0.4220513, 1)
-
-[sub_resource type="TorusMesh" id="TorusMesh_c1w88"]
-material = SubResource("StandardMaterial3D_c1w88")
 
 [sub_resource type="Environment" id="Environment_c1w88"]
 ambient_light_source = 2
@@ -31,9 +19,6 @@ background_color = Color(0, 0.48235294, 0, 1)
 sky = SubResource("Sky_rgh2o")
 
 [node name="Main" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("TorusMesh_c1w88")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.84115225, 0.54079837, 0, -0.54079837, 0.84115225, 0.0138475895, 1.0044974, 1.5418075)
