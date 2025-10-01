@@ -18,10 +18,12 @@ sky = SubResource("Sky_rgh2o")
 
 [node name="Main" type="Node3D"]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_kln2b")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("attackTarget") instance=ExtResource("1_kln2b")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+attackTarget = NodePath("../BasicEnemy")
 
 [node name="BasicEnemy" parent="." instance=ExtResource("2_rgh2o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2754087, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.2754087, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.5045276, 0, -0.8633956, 0, 1, 0, 0.8633956, 0, 0.5045276, -1.2550038, 0.7525041, 1.711262)
@@ -29,3 +31,48 @@ current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pbw6q")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(620, 67)
+render_target_update_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Button" type="Button" parent="SubViewportContainer/SubViewport/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Attack"
+
+[node name="Button2" type="Button" parent="SubViewportContainer/SubViewport/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Get attacked"
+
+[connection signal="pressed" from="SubViewportContainer/SubViewport/MarginContainer/HBoxContainer/Button" to="PlayerCharacter" method="Attack"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/MarginContainer/HBoxContainer/Button2" to="PlayerCharacter" method="GetAttacked"]

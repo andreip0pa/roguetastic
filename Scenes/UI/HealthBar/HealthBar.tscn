@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6xe1d2cgxvoj"]
+
+[ext_resource type="Script" uid="uid://c7d2uvooysy80" path="res://Scenes/UI/HealthBar/HealthBar.cs" id="1_bgb56"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bgb56"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgb56"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_texture = SubResource("ViewportTexture_bgb56")
+stencil_flags = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j0u5c"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_bgb56")
+size = Vector2(2, 0.1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0k2n"]
+bg_color = Color(0.7481022, 0.25964987, 0.17649573, 1)
+
+[node name="HealthBar" type="MeshInstance3D" node_paths=PackedStringArray("progressBar")]
+mesh = SubResource("PlaneMesh_j0u5c")
+script = ExtResource("1_bgb56")
+progressBar = NodePath("SubViewport/ProgressBar")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_n0k2n")
+step = 1.0
+rounded = true
+show_percentage = false
