@@ -29,6 +29,7 @@ project/assembly_name="Roguetastic"
 [file_customization]
 
 folder_colors={
+"res://Components/": "purple",
 "res://Scenes/": "blue"
 }
 
